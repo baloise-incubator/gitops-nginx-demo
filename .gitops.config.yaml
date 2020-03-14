@@ -1,10 +1,10 @@
 deploymentConfig:
   # The organisation name of your deployment repo
-  org: joachimprinzbach
+  org: baloise-incubator
   # The repostiory name of your deployment repo
   repository: deployments
   # The name of the application that is used in your deployment repo
-  applicationName: gitops-example-static
+  applicationName: gitops-nginx-demo
 
 previewConfig:
   route:
