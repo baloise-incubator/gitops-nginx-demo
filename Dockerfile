@@ -1,4 +1,3 @@
-FROM docker.io/library/nginx:alpine
+FROM bitnami/nginx:latest
 
-COPY default.conf /etc/nginx/conf.d/
-COPY index.html /usr/share/nginx/html/
+COPY static /app
