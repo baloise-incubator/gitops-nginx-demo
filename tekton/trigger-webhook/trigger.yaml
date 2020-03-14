@@ -48,10 +48,10 @@ spec:
         resources:
           - name: repo
             resourceRef:
-              name: gitops-example-gitrepo
+              name: gitops-example-static-git-resource
           - name: image
             resourceRef:
-              name: gitops-example-imagerepo
+              name: gitops-example-static-image-resource
         params:
           - name: deployment-name
             value: $(params.gitrepositoryname)
