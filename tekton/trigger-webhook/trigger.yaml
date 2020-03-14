@@ -1,0 +1,101 @@
+apiVersion: tekton.dev/v1alpha1
+kind: TriggerTemplate
+metadata:
+  name: gitopscli-triggertemplate
+spec:
+  params:
+    - name: gitrevision
+      description: The git revision
+      default: master
+    - name: gitrepositoryurl
+      description: The git repository url
+    - name: namespace
+      description: The namespace to create the resources
+    - name: gitrepositoryname
+      description: The name of the deployment to be created / patched
+  resourcetemplates:
+    - apiVersion: tekton.dev/v1alpha1
+      kind: PipelineResource
+      metadata:
+        name: source-repo-$(params.gitrepositoryname)-$(uid)
+        namespace: $(params.namespace)
+      spec:
+        type: git
+        params:
+          - name: revision
+            value: $(params.gitrevision)
+          - name: url
+            value: $(params.gitrepositoryurl)
+    - apiVersion: tekton.dev/v1alpha1
+      kind: PipelineResource
+      metadata:
+        name: image-source-$(params.gitrepositoryname)-$(uid)
+        namespace: $(params.namespace)
+      spec:
+        type: image
+        params:
+          - name: url
+            value: joachimprinzbach/gitopscli:latest
+    - apiVersion: tekton.dev/v1alpha1
+      kind: PipelineRun
+      metadata:
+        name: gitopscli-pipeline-$(params.gitrepositoryname)-$(uid)
+        namespace: $(params.namespace)
+      spec:
+        pipelineRef:
+          name: build-and-push
+        serviceAccountName: 'pipeline'
+        resources:
+          - name: repo
+            resourceRef:
+              name: gitopscli-gitrepo
+          - name: image
+            resourceRef:
+              name: gitopscli-imagerepo
+        params:
+          - name: deployment-name
+            value: $(params.gitrepositoryname)
+
+---
+apiVersion: tekton.dev/v1alpha1
+kind: TriggerBinding
+metadata:
+  name: gitops-example-pipelinebinding
+spec:
+  params:
+    - name: gitrevision
+      value: $(body.head_commit.id)
+    - name: namespace
+      value: gitopscli-pipeline
+    - name: gitrepositoryurl
+      value: $(body.repository.url)
+    - name: gitrepositoryname
+      value: $(body.repository.name)
+---
+apiVersion: tekton.dev/v1alpha1
+kind: EventListener
+metadata:
+  name: gitops-example-listener
+spec:
+  serviceAccountName: tekton-triggers-sa
+  triggers:
+    - binding:
+        name: gitops-example-pipelinebinding
+      template:
+        name: gitops-example-triggertemplate
+---
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  name: gitops-example-eventlistener
+spec:
+  tls:
+    insecureEdgeTerminationPolicy: Redirect
+    termination: edge
+  wildcardPolicy: None
+  port:
+    targetPort: 8080
+  to:
+    kind: Service
+    name: el-gitops-example-listener
+    weight: 100

@@ -1,0 +1,10 @@
+apiVersion: tekton.dev/v1alpha1
+kind: PipelineResource
+metadata:
+  name: gitops-example-static-git-resource
+  namespace: gitops-example-static
+spec:
+  params:
+    - name: url
+      value: https://github.com/baloise-incubator/gitops-nginx-demo
+  type: git

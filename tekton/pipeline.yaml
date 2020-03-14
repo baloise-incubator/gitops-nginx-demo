@@ -1,0 +1,43 @@
+apiVersion: tekton.dev/v1alpha1
+kind: Pipeline
+metadata:
+  name: build-and-push
+spec:
+  resources:
+    - name: repo
+      type: git
+    - name: image
+      type: image
+
+  tasks:
+    - name: build
+      taskRef:
+        name: buildah
+        kind: ClusterTask
+      resources:
+        inputs:
+          - name: source
+            resource: repo
+        outputs:
+          - name: image
+            resource: image
+      params:
+        - name: TLSVERIFY
+          value: "false"
+---
+apiVersion: tekton.dev/v1alpha1
+kind: PipelineRun
+metadata:
+  name: gitops-nginx-demo-pipeline
+  namespace: gitops-nginx-demo-pipeline
+spec:
+  serviceAccountName: pipeline
+  pipelineRef:
+    name: build-and-push
+  resources:
+    - name: repo
+      resourceRef:
+        name: gitops-nginx-demo-gitrepo
+    - name: image
+      resourceRef:
+        name: gitops-nginx-demo-imagerepo
