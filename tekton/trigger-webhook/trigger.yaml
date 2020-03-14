@@ -1,7 +1,7 @@
 apiVersion: tekton.dev/v1alpha1
 kind: TriggerTemplate
 metadata:
-  name: gitopscli-triggertemplate
+  name: gitops-example-triggertemplate
 spec:
   params:
     - name: gitrevision
@@ -35,11 +35,11 @@ spec:
         type: image
         params:
           - name: url
-            value: joachimprinzbach/gitopscli:latest
+            value: joachimprinzbach/gitops-example:latest
     - apiVersion: tekton.dev/v1alpha1
       kind: PipelineRun
       metadata:
-        name: gitopscli-pipeline-$(params.gitrepositoryname)-$(uid)
+        name: gitops-example-pipeline-$(params.gitrepositoryname)-$(uid)
         namespace: $(params.namespace)
       spec:
         pipelineRef:
@@ -48,10 +48,10 @@ spec:
         resources:
           - name: repo
             resourceRef:
-              name: gitopscli-gitrepo
+              name: gitops-example-gitrepo
           - name: image
             resourceRef:
-              name: gitopscli-imagerepo
+              name: gitops-example-imagerepo
         params:
           - name: deployment-name
             value: $(params.gitrepositoryname)
@@ -66,7 +66,7 @@ spec:
     - name: gitrevision
       value: $(body.head_commit.id)
     - name: namespace
-      value: gitopscli-pipeline
+      value: gitops-example-pipeline
     - name: gitrepositoryurl
       value: $(body.repository.url)
     - name: gitrepositoryname
