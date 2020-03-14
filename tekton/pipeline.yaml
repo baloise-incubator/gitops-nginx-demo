@@ -29,7 +29,6 @@ apiVersion: tekton.dev/v1alpha1
 kind: PipelineRun
 metadata:
   name: gitops-nginx-demo-pipeline
-  namespace: gitops-nginx-demo-pipeline
 spec:
   serviceAccountName: pipeline
   pipelineRef:
