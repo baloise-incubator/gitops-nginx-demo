@@ -5,5 +5,5 @@ metadata:
 spec:
   params:
   - name: url
-    value: https://registry.baloise.dev/example/gitops-nginx-demo:latest
+    value: registry.baloise.dev/example/gitops-nginx-demo:latest
   type: image
