@@ -44,7 +44,7 @@ spec:
       spec:
         pipelineRef:
           name: build-and-push
-        serviceAccountName: 'harbor-sa'
+        serviceAccountName: harbor-sa
         resources:
           - name: repo
             resourceRef:
