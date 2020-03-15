@@ -13,7 +13,7 @@ spec:
     - name: build
       taskRef:
         name: buildah-docker-format
-        kind: ClusterTask
+        kind: Task
       resources:
         inputs:
           - name: source
