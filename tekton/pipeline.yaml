@@ -87,7 +87,7 @@ spec:
     - name: push
       image: $(inputs.params.BUILDER_IMAGE)
       workingDir: /workspace/source
-      command: ['buildah', 'push', '--format=docker', '--tls-verify=$(inputs.params.TLSVERIFY)', '$(outputs.resources.image.url)', 'docker://$(outputs.resources.image.url)']
+      command: ['buildah', 'push', '--tls-verify=$(inputs.params.TLSVERIFY)', '$(outputs.resources.image.url)', 'docker://$(outputs.resources.image.url)']
       volumeMounts:
         - name: varlibcontainers
           mountPath: /var/lib/containers
