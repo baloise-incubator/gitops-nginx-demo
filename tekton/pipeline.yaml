@@ -21,9 +21,6 @@ spec:
         outputs:
           - name: image
             resource: image
-      params:
-        - name: TLSVERIFY
-          value: "false"
 ---
 apiVersion: tekton.dev/v1alpha1
 kind: PipelineRun
