@@ -35,16 +35,16 @@ spec:
         type: image
         params:
           - name: url
-            value: joachimprinzbach/gitops-example:latest
+            value: registry.baloise.dev/joachimprinzbach/gitops-nginx-demo:$(params.gitrevision)
     - apiVersion: tekton.dev/v1alpha1
       kind: PipelineRun
       metadata:
-        name: gitops-example-pipeline-$(params.gitrepositoryname)-$(uid)
+        name: gitops-nginx-demo-pipeline-$(params.gitrepositoryname)-$(uid)
         namespace: $(params.namespace)
       spec:
         pipelineRef:
           name: build-and-push
-        serviceAccountName: 'pipeline'
+        serviceAccountName: 'harbor-sa'
         resources:
           - name: repo
             resourceRef:
