@@ -51,4 +51,4 @@ kind: ServiceAccount
 metadata:
   name: harbor-sa
 secrets:
-  - name: basic-user-pass
+  - name: tempi
