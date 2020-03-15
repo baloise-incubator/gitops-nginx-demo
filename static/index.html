@@ -23,9 +23,8 @@
     <div class="fixed-side-navbar">
         <ul class="nav flex-column">
             <li class="nav-item"><a class="nav-link" href="#home"><span>Intro</span></a></li>
-            <li class="nav-item"><a class="nav-link" href="#services"><span>Services</span></a></li>
-            <li class="nav-item"><a class="nav-link" href="#portfolio"><span>Portfolio</span></a></li>
-            <li class="nav-item"><a class="nav-link" href="#our-story"><span>Our Story</span></a></li>
+            <li class="nav-item"><a class="nav-link" href="#process"><span>Process</span></a></li>
+            <li class="nav-item"><a class="nav-link" href="#tools"><span>Tools</span></a></li>
             <li class="nav-item"><a class="nav-link" href="#contact-us"><span>Contact Us</span></a></li>
         </ul>
     </div>
@@ -33,32 +32,31 @@
     <div class="parallax-content baner-content" id="home">
         <div class="container">
             <div class="first-content">
-                <h1>GitOps</h1>
+                <h1>GitOps@Baloise</h1>
                 <span><em>ArgoCD</em> and <em>GitOpsCli</em> with <em>Tekton</em> on <em>OKD4</em></span>
                 <div class="primary-button">
-                    <a href="#services">Discover More</a>
+                    <a href="#process">Discover More</a>
                 </div>
             </div>
         </div>
     </div>
 
 
-    <div class="service-content" id="services">
+    <div class="service-content" id="process">
         <div class="container">
             <div class="row">
                 <div class="col-md-4">
                     <div class="left-text">
-                        <h4>More About our GitOps process</h4>
+                        <h4>More about our GitOps process</h4>
                         <div class="line-dec"></div>
-                        <p>GitOps, blabla & mehr gedöhns das keiner hören will :D :D :D</p>
+                        <p>From the idea of a new product until the deployment in production - a matter of seconds, only by applying git commands!</p>
                         <ul>
-                            <li>-  Praesent porta urna id eros</li>
-                            <li>-  Curabitur consectetur malesuada</li>
-                            <li>-  Nam pretium imperdiet enim</li>
-                            <li>-  Sed viverra arcu non nisi efficitur</li>
+                            <li>-  Automatically create new namespaces securely</li>
+                            <li>-  Decorate PullRequests using a ChatOps based Bot</li>
+                            <li>-  Preview environments for every PullRequest</li>
                         </ul>
                         <div class="primary-button">
-                            <a href="#portfolio">See more tools that we use</a>
+                            <a href="#tools">Have a look at the tools that we use</a>
                         </div>
                     </div>
                 </div>
@@ -66,30 +64,30 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="service-item">
-                                <h4>ArgoCD</h4>
+                                <h4>Secure</h4>
                                 <div class="line-dec"></div>
-                                <p>Sed lacinia ligula est, at venenatis ex iaculis quis. Morbi sollicitudin nulla eget odio pellentesque.</p>
+                                <p>Only allow namespace creation by a technical user - but fully automated whenever you start a new project or a preview namespace is created.</p>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="service-item">
-                                <h4>Tekton</h4>
+                                <h4>Cloud Native</h4>
                                 <div class="line-dec"></div>
-                                <p>Sed lacinia ligula est, at venenatis ex iaculis quis. Morbi sollicitudin nulla eget odio pellentesque.</p>
+                                <p>Every ChatOps command triggers a Tekton pipeline, images get published to harbor and every single step runs in its own container.</p>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="service-item">
-                                <h4>GitOpsCli</h4>
+                                <h4>Scalable</h4>
                                 <div class="line-dec"></div>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed lacinia ligula est, at venenatis ex iaculis quis.</p>
+                                <p>It works for a single team or a whole organisation of many agile DevOps teams, every team can operate independently using only git.</p>
                             </div>
                         </div>
                         <div class="col-md-6">
                             <div class="service-item">
-                                <h4>OKD4/7</h4>
+                                <h4>Open Source</h4>
                                 <div class="line-dec"></div>
-                                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed lacinia ligula est, at venenatis ex iaculis quis.</p>
+                                <p>Everything available as Open Source, all the components, tools and concepts. Feel free to use, contribute or fill issues. We love your feedback!</p>
                             </div>
                         </div>
                     </div>
@@ -99,101 +97,65 @@
     </div>
 
     
-    <div class="parallax-content projects-content" id="portfolio">
+    <div class="parallax-content projects-content" id="tools">
         <div class="container">
             <div class="row">
                 <div class="col-md-12">
                     <div id="owl-testimonials" class="owl-carousel owl-theme">
                         <div class="item">
                             <div class="testimonials-item">
-                                <a href="img/1st-big-item.jpg" data-lightbox="image-1"><img src="img/1st-item.jpg" alt=""></a>
+                                <a href="https://tekton.dev/" target="_blank"><img src="img/tekton_pipeline.jpg" alt=""></a>
                                 <div class="text-content">
                                     <h4>Tekton</h4>
-                                    <span>CICD</span>
+                                    <span>Kubernetes-style native pipeline resources for declarative CI/CD.</span>
                                 </div>
                             </div>
                         </div>
                         <div class="item">
                             <div class="testimonials-item">
-                                <a href="img/2nd-big-item.jpg" data-lightbox="image-1"><img src="img/2nd-item.jpg" alt=""></a>
+                                <a href="https://baloise-incubator.github.io/gitopscli/" target="_blank"><img src="img/gitopscli_git.jpg" alt=""></a>
                                 <div class="text-content">
                                     <h4>GitOpsCli</h4>
-                                    <span>Schlange</span>
+                                    <span>Perform GitOps operations and replace yaml values.</span>
                                 </div>
                             </div>
                         </div>
                         <div class="item">
                             <div class="testimonials-item">
-                                <a href="img/3rd-big-item.jpg" data-lightbox="image-1"><img src="img/3rd-item.jpg" alt=""></a>
+                                <a href="https://argoproj.github.io/argo-cd/" target="_blank"><img src="img/argo_octopus.jpg" alt=""></a>
                                 <div class="text-content">
                                     <h4>ArgoCD</h4>
-                                    <span>Cloud Native</span>
+                                    <span>ArgoCD is a declarative, GitOps CD tool for Kubernetes.</span>
                                 </div>
                             </div>
                         </div>
                         <div class="item">
                             <div class="testimonials-item">
-                                <a href="img/4th-big-item.jpg" data-lightbox="image-1"><img src="img/4th-item.jpg" alt=""></a>
+                                <a href="https://www.okd.io/asdsadsadasdsadasdasdsad" target="_blank"><img src="img/openshift_container.jpg" alt=""></a>
                                 <div class="text-content">
                                     <h4>OKD4</h4>
-                                    <span>Huuuui</span>
+                                    <span>The Origin community distribution of Kubernetes.</span>
                                 </div>
                             </div>
                         </div>
                         <div class="item">
                             <div class="testimonials-item">
-                                <a href="img/5th-big-item.jpg" data-lightbox="image-1"><img src="img/5th-item.jpg" alt=""></a>
+                                <a href="https://helm.sh/" target="_blank"><img src="img/helm_ship.jpg" alt=""></a>
                                 <div class="text-content">
                                     <h4>Helm</h4>
-                                    <span>Fahrrad oder Motorrad</span>
+                                    <span>The Kubernetes package manager - template your charts with go.</span>
                                 </div>
                             </div>
                         </div>
                         <div class="item">
                             <div class="testimonials-item">
-                                <a href="img/6th-big-item.jpg" data-lightbox="image-1"><img src="img/6th-item.jpg" alt=""></a>
+                                <a href="https://github.com/bitnami-labs/sealed-secrets" target="_blank"><img src="img/sealed-secret_seal.jpg" alt=""></a>
                                 <div class="text-content">
                                     <h4>Sealed Secrets</h4>
-                                    <span>Infrastructure as a Code</span>
+                                    <span>One way encrypted secrets - safe to store in Git.</span>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-
-    <div class="tabs-content" id="our-story">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-8 mx-auto">
-                    <div class="wrapper">
-                    <section id="first-tab-group" class="tabgroup">
-                      <div id="tab1">
-                        <img src="img/1st-tab.jpg" alt="">
-                        <p>Sample text - this is awesome</p>
-                      </div>
-                      <div id="tab2">
-                        <img src="img/2nd-tab.jpg" alt="">
-                        <p>Aliquam eu ultrices risus, sed condimentum diam. Duis risus nulla, elementum vitae nisi a, ornare maximus nisl. Morbi et vehicula est. Cras at vulputate justo. Cras eu nulla metus. Ut et pretium velit. Pellentesque at neque tristique dui tempor venenatis.</p>
-                      </div>
-                      <div id="tab3">
-                        <img src="img/3rd-tab.jpg" alt="">
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed lacinia ligula est, at venenatis ex iaculis quis. Morbi sollicitudin nulla eget odio pellentesque, sed cursus diam iaculis.</p>
-                      </div>
-                      <div id="tab4">
-                        <img src="img/4th-tab.jpg" alt="">
-                        <p>Duis risus nulla, elementum vitae nisi a, ornare maximus nisl. Morbi et vehicula est. Cras at vulputate justo. Cras eu nulla metus. Ut et pretium velit. Pellentesque at neque tristique.</p>
-                      </div>
-                    </section>
-                    <ul class="tabs clearfix" data-tabgroup="first-tab-group">
-                      <li><a href="#tab1" class="active">First tab</a></li>
-                      <li><a href="#tab2">Second tab</a></li>
-                      <li><a href="#tab3">Third tab</a></li>
-                      <li><a href="#tab4">Fourth tab</a></li>
-                    </ul>
                     </div>
                 </div>
             </div>
@@ -257,7 +219,8 @@
                         <li><a href="https://www.baloise.ch" target="_blank"><i class="fa fa-building"></i></a></li>
                         <li><a href="https://de.slideshare.net" target="_blank"><i class="fa fa-slideshare"></i></a></li>
                     </ul>
-                    <p>Copyright &copy; 2020 Baloise Incubator & Friends</p>
+                    <p>Built with <a href=""><i class="fa fa-heart"></i></a>, lots of <a href=""><i class="fa fa-coffee"></i></a> and <a href=""><i class="fa fa-telegram"></i></a>. Running on <a href=""><i class="fa fa-anchor"></i></a> and <a href=""><i class="fa fa-ship"></i></a>.</p>
+                    <p>Copyright &copy; 2020 Baloise Incubator & Friends.</p>
                 </div>
             </div>
         </div>
