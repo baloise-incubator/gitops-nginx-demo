@@ -48,14 +48,10 @@ spec:
         resources:
           - name: repo
             resourceRef:
-              name: demo-git-resource
+              name: source-repo-$(params.gitrepositoryname)-$(uid)
           - name: image
             resourceRef:
-              name: demo-image-resource
-        params:
-          - name: deployment-name
-            value: $(params.gitrepositoryname)
-
+              name: image-source-$(params.gitrepositoryname)-$(uid)
 ---
 apiVersion: tekton.dev/v1alpha1
 kind: TriggerBinding
