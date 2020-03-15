@@ -30,7 +30,7 @@ kind: PipelineRun
 metadata:
   name: gitops-nginx-demo-pipeline
 spec:
-  serviceAccountName: pipeline
+  serviceAccountName: harbor-sa
   pipelineRef:
     name: build-and-push
   resources:

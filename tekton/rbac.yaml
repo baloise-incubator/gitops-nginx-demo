@@ -45,3 +45,10 @@ roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: Role
   name: tekton-triggers-role
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: harbor-sa
+secrets:
+  - name: regcred
