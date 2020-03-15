@@ -33,7 +33,7 @@ spec:
   resources:
     - name: repo
       resourceRef:
-        name: gitops-example-static-git-resource
+        name: demo-git-resource
     - name: image
       resourceRef:
-        name: gitops-example-static-image-resource
+        name: demo-image-resource

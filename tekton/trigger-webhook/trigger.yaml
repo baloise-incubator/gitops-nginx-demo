@@ -1,7 +1,7 @@
 apiVersion: tekton.dev/v1alpha1
 kind: TriggerTemplate
 metadata:
-  name: gitops-example-triggertemplate
+  name: gitops-demo-triggertemplate
 spec:
   params:
     - name: gitrevision
@@ -48,10 +48,10 @@ spec:
         resources:
           - name: repo
             resourceRef:
-              name: gitops-example-static-git-resource
+              name: demo-git-resource
           - name: image
             resourceRef:
-              name: gitops-example-static-image-resource
+              name: demo-image-resource
         params:
           - name: deployment-name
             value: $(params.gitrepositoryname)
@@ -60,7 +60,7 @@ spec:
 apiVersion: tekton.dev/v1alpha1
 kind: TriggerBinding
 metadata:
-  name: gitops-example-pipelinebinding
+  name: gitops-demo-pipelinebinding
 spec:
   params:
     - name: gitrevision
@@ -75,19 +75,19 @@ spec:
 apiVersion: tekton.dev/v1alpha1
 kind: EventListener
 metadata:
-  name: gitops-example-listener
+  name: gitops-demo-listener
 spec:
   serviceAccountName: tekton-triggers-sa
   triggers:
     - binding:
-        name: gitops-example-pipelinebinding
+        name: gitops-demo-pipelinebinding
       template:
-        name: gitops-example-triggertemplate
+        name: gitops-demo-triggertemplate
 ---
 apiVersion: route.openshift.io/v1
 kind: Route
 metadata:
-  name: gitops-example-eventlistener
+  name: gitops-demo-eventlistener
 spec:
   tls:
     insecureEdgeTerminationPolicy: Redirect
@@ -97,5 +97,5 @@ spec:
     targetPort: 8080
   to:
     kind: Service
-    name: el-gitops-example-listener
+    name: el-gitops-demo-listener
     weight: 100

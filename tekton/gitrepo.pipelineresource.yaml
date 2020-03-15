@@ -1,7 +1,7 @@
 apiVersion: tekton.dev/v1alpha1
 kind: PipelineResource
 metadata:
-  name: gitops-example-static-git-resource
+  name: demo-git-resource
 spec:
   params:
     - name: url
