@@ -1,3 +1,3 @@
 # gitops-demo-static 
 
-This is a test
+This is a test for the roundtrip
