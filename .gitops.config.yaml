@@ -15,7 +15,6 @@ previewConfig:
   replace:
     # Paths that should be replaced
     - path: generic.image.tag
-      variable: 0.2.0 # this is the latest git hash of the PR branch
-      #variable: GIT_COMMIT # this is the latest git hash of the PR branch
+      variable: GIT_COMMIT # this is the latest git hash of the PR branch
     - path: generic.ingress.host
       variable: ROUTE_HOST # this is the resolved SHA256_8CHAR_BRANCH_HASH from above
