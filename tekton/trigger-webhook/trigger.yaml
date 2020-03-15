@@ -35,7 +35,7 @@ spec:
         type: image
         params:
           - name: url
-            value: joachimprinzbach/gitops-nginx-demo:latest
+            value: registry.baoloise.dev/joachimprinzbach/gitops-nginx-demo:latest
     - apiVersion: tekton.dev/v1alpha1
       kind: PipelineRun
       metadata:
