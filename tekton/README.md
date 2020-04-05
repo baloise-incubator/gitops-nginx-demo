@@ -1,0 +1,3 @@
+- create ns gitops-nginx-demo-pipeline
+- create sealed secret for git access
+- create sealed secret for harbor access

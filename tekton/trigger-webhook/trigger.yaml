@@ -62,7 +62,7 @@ spec:
     - name: gitrevision
       value: $(body.head_commit.id)
     - name: namespace
-      value: demo-pipeline
+      value: gitops-nginx-demo-pipeline
     - name: gitrepositoryurl
       value: $(body.repository.url)
     - name: gitrepositoryname
