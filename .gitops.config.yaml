@@ -14,7 +14,7 @@ previewConfig:
       template: gitops-nginx-demo-{SHA256_8CHAR_BRANCH_HASH}.apps.okd.baloise.dev
   replace:
     # Paths that should be replaced
-    - path: generic.image.tag
+    - path: gitops-demo.image.tag
       variable: GIT_COMMIT # this is the latest git hash of the PR branch
-    - path: generic.ingress.host
+    - path: network.http.ingress.host
       variable: ROUTE_HOST # this is the resolved SHA256_8CHAR_BRANCH_HASH from above
