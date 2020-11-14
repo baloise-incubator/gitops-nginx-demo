@@ -8,7 +8,6 @@ spec:
       type: git
     - name: image
       type: image
-
   tasks:
     - name: build
       taskRef:
