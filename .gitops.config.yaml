@@ -7,13 +7,11 @@ deploymentConfig:
   applicationName: gitops-nginx-demo
 
 previewConfig:
-  network:
-    http:
-      ingress:
-        host:
-          # your router host.
-          #{SHA256_8CHAR_BRANCH_HASH} gets replaced by a shortened hash of your feature branch name
-          template: gitops-nginx-demo-{SHA256_8CHAR_BRANCH_HASH}.apps.okd.baloise.dev
+  route:
+    host:
+      # your router host.
+      #{SHA256_8CHAR_BRANCH_HASH} gets replaced by a shortened hash of your feature branch name
+      template: gitops-nginx-demo-{SHA256_8CHAR_BRANCH_HASH}.apps.okd.baloise.dev
   replace:
     # Paths that should be replaced
     - path: gitops-demo.image.tag
