@@ -1,3 +1,3 @@
-FROM bitnami/nginx:1.16.1
+FROM bitnami/nginx:latest
 
 COPY static /app
