@@ -1,4 +1,4 @@
-# GitOps nginx demo
+# GitOps nginx demo app
 
 Showcase a GitOps based process with a simple static site running on nginx.
 
