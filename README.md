@@ -13,3 +13,4 @@ Make some changes, commit them to a branch and open a PullRequest. Wait for the 
 Preview environments need a basic configuration to enable the linking between an application and the deployment configuration repository.
 See the comments in [.gitops.config.yaml](./.gitops.config.yaml) for an explanation of the needed properties.
 
+
