@@ -11,7 +11,7 @@ pipeline {
                 script {
                     currentBuild.description = GIT_COMMIT
                 }
-                containerBuild(repository: "example/gitops-nginx-demo:${GIT_COMMIT}")
+                containerBuild(repository: "example/gitops-nginx-demo", tags: [GIT_COMMIT])
             }
         }
     }
