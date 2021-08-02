@@ -1,16 +1,16 @@
 apiVersion: v1
 applicationName: gitops-nginx-demo
 previewConfig:
-  host: {PREVIEW_NAMESPACE}.apps.baloise.dev
+  host: "{PREVIEW_NAMESPACE}.apps.baloise.dev"
   target:
     organisation: baloise-incubator
     repository: okd4-example-apps
   replace:
     Chart.yaml:
       - path: name
-        value: {PREVIEW_NAMESPACE}
+        value: "{PREVIEW_NAMESPACE}"
     values.yaml:
       - path: gitops-demo.image.tag
-        value: {GIT_HASH}
+        value: "{GIT_HASH}"
       - path: gitops-demo.network.http.ingress.host
-        value: {PREVIEW_HOST}
+        value: "{PREVIEW_HOST}"
