@@ -8,7 +8,10 @@ pipeline {
     stages {
         stage('Build and Push') {
             steps {
-                containerBuild(repository: "example/gitops-nginx-demo")
+                script {
+                    currentBuild.description = GIT_COMMIT
+                }
+                containerBuild(repository: "example/gitops-nginx-demo:${GIT_COMMIT}")
             }
         }
     }
