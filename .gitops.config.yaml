@@ -5,6 +5,7 @@ previewConfig:
   target:
     organisation: baloise-incubator
     repository: okd4-example-apps
+    namespace: "{APPLICATION_NAME}-{PREVIEW_ID_HASH}-preview"
   replace:
     Chart.yaml:
       - path: name
