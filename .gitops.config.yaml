@@ -1,7 +1,7 @@
 apiVersion: v1
 applicationName: gitops-nginx-demo
 previewConfig:
-  host: {PREVIEW_NAMESPACE}.apps.okd.baloise.dev
+  host: {PREVIEW_NAMESPACE}.apps.baloise.dev
   target:
     organisation: baloise-incubator
     repository: okd4-example-apps
