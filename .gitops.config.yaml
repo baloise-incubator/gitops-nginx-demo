@@ -1,11 +1,11 @@
 apiVersion: v2_beta
 applicationName: gitops-nginx-demo
 previewConfig:
-  host: "${APPLICATION_NAME}-${PREVIEW_ID}-${PREVIEW_ID_HASH}.apps.baloise.dev"
+  host: "${APPLICATION_NAME}-${PREVIEW_ID}-${PREVIEW_ID_HASH_SHORT}-preview.apps.baloise.dev"
   target:
     organisation: baloise-incubator
     repository: okd4-example-apps
-    namespace: "${APPLICATION_NAME}-${PREVIEW_ID_HASH}-preview"
+    namespace: "${APPLICATION_NAME}-${PREVIEW_ID_HASH_SHORT}-preview"
   replace:
     Chart.yaml:
       - path: name
