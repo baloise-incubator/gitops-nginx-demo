@@ -1,4 +1,4 @@
-apiVersion: v2_beta
+apiVersion: v2
 applicationName: gitops-nginx-demo
 previewConfig:
   host: ${PREVIEW_NAMESPACE}.apps.baloise.dev
