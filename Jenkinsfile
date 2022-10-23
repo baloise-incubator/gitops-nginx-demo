@@ -16,7 +16,7 @@ pipeline {
         }
         stage('Deploy') {
             steps {
-                patchYaml(repository: "gitops-nginx-demo", file: "gitops-nginx-demo-test/values.yaml", yamlPatches: ["app.image.tag": GIT_COMMIT])
+                patchYaml(repositoryName: "gitops-nginx-demo", file: "gitops-nginx-demo-test/values.yaml", yamlPatches: ["app.image.tag": GIT_COMMIT])
             }
         }
     }
