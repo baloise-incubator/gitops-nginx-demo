@@ -14,6 +14,11 @@ pipeline {
                 containerBuild(repository: "example/gitops-nginx-demo", tags: [GIT_COMMIT])
             }
         }
+        stage('Deploy') {
+            steps {
+                patchYaml(repository: "gitops-nginx-demo", file: "gitops-nginx-demo-test/values.yaml", yamlPatches: ["app.image.tag": GIT_COMMIT])
+            }
+        }
     }
 }
 
