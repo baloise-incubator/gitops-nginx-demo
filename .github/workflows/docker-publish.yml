@@ -75,4 +75,4 @@ jobs:
           KUBE_HOST: ${{ secrets.KUBE_HOST }}
           KUBE_TOKEN: ${{ secrets.KUBE_TOKEN }}
         with:
-          args: annotate warehouse gitops-images -n gitops-stages reload=$EPOCHSECONDS
+          args: annotate warehouse gitops-images -n gitops-stages reload=$EPOCHSECONDS --overwrite
