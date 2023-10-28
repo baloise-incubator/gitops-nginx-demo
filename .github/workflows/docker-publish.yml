@@ -70,3 +70,9 @@ jobs:
           labels: ${{ steps.meta.outputs.labels }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
+      - uses: actions-hub/kubectl@master
+        env:
+          KUBE_HOST: ${{ secrets.KUBE_HOST }}
+          KUBE_TOKEN: ${{ secrets.KUBE_TOKEN }}
+        with:
+          args: annotate warehouse gitops-images -n gitops-stages reload=$EPOCHSECONDS
