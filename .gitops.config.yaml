@@ -1,5 +1,5 @@
 apiVersion: v2
-applicationName: gitops-nginx-demo
+applicationname: kargo-demo-nginx-demo
 previewConfig:
   host: ${PREVIEW_NAMESPACE}.apps.baloise.dev
   target:
