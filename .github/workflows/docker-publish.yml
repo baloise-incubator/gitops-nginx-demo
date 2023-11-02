@@ -32,7 +32,7 @@ jobs:
 
     steps:
       - name: Checkout repository
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
 
       # Set up BuildKit Docker container builder to be able to build
       # multi-platform images and export cache
@@ -70,6 +70,29 @@ jobs:
           labels: ${{ steps.meta.outputs.labels }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
+
+      - name: Install Kubernetes tools
+        uses: yokawasa/action-setup-kube-tools@v0.9.3
+        with:
+          setup-tools: |
+            helmv3
+            yq
+          helm: "3.8.0"
+          yq: "4.16.2"
+
+      - name: Configure Git
+        run: |
+          git config user.name "Incubator"
+          git config user.email "incubator@users.noreply.github.com"
+
+      - name: Run chart-releaser
+        uses: helm/chart-releaser-action@v1.6.0
+        with:
+          charts_dir: charts/*
+        env:
+          CR_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+          CR_SKIP_EXISTING: "true"
+
       - name: Reload warehouse
         uses: actions-hub/kubectl@master
         env:
