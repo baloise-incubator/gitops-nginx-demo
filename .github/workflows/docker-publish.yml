@@ -91,6 +91,7 @@ jobs:
         uses: helm/chart-releaser-action@v1.6.0
         env:
           CR_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+          CR_SKIP_EXISTING: "true"
 
       - name: Reload warehouse
         uses: actions-hub/kubectl@master
@@ -99,3 +100,12 @@ jobs:
           KUBE_TOKEN: ${{ secrets.KUBE_TOKEN }}
         with:
           args: annotate warehouse kargo-demo -n kargo-demo-stages reload=${{ github.sha }} --overwrite
+
+      - name: Reload warehouse2
+        uses: actions-hub/kubectl@master
+        env:
+          KUBE_HOST: ${{ secrets.KUBE_HOST }}
+          KUBE_TOKEN: ${{ secrets.KUBE_TOKEN }}
+        with:
+          args: annotate warehouse kargo-demo-joachim -n kargo-joachim-stages reload=${{ github.sha }} --overwrite
+
