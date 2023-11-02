@@ -2,7 +2,7 @@ kargo-joachim-chart:
   replicaCount: 1
   image:
     repository: docker.io/niiku/gitops-nginx-demo
-    tag: REPLACEME
+    tag: REPLACEME_CHANGED
   network:
     http:
       servicePort: 8080
