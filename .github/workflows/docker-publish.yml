@@ -107,5 +107,5 @@ jobs:
           KUBE_HOST: ${{ secrets.KUBE_HOST }}
           KUBE_TOKEN: ${{ secrets.KUBE_TOKEN }}
         with:
-          args: annotate warehouse kargo-demo-joachim -n kargo-joachim-stages reload=${{ github.sha }} --overwrite
+          args: annotate warehouse kargo-joachim -n kargo-joachim-stages reload=${{ github.sha }} --overwrite
 
