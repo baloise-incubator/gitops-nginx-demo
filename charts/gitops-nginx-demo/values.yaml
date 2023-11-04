@@ -2,7 +2,7 @@ app:
   replicaCount: 1
   image:
     repository: docker.io/niiku/gitops-nginx-demo
-    tag: TAGGY
+    tag: TAG
   network:
     http:
       servicePort: 8080
