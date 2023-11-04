@@ -72,24 +72,25 @@ jobs:
           labels: ${{ steps.meta.outputs.labels }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
-  helm-push:
-    name: Push Helm Chart
-    needs: container-build-push
-    runs-on: ubuntu-latest
-    if: ${{ github.event_name != 'pull_request' && startsWith(github.ref, 'refs/tags/v') }}
-    permissions:
-      contents: write
-      packages: write
-      # This is used to complete the identity challenge
-      # with sigstore/fulcio when running outside of PRs.
-      id-token: write
-
-    steps:
-      - name: Checkout repository
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 0
+#  helm-push:
+#    name: Push Helm Chart
+#    needs: container-build-push
+#    runs-on: ubuntu-latest
+#    if: ${{ github.event_name != 'pull_request' && startsWith(github.ref, 'refs/tags/v') }}
+#    permissions:
+#      contents: write
+#      packages: write
+#      # This is used to complete the identity challenge
+#      # with sigstore/fulcio when running outside of PRs.
+#      id-token: write
+#
+#    steps:
+#      - name: Checkout repository
+#        uses: actions/checkout@v4
+#        with:
+#          fetch-depth: 0
       - name: Install helm & yq tools
+        if: ${{ github.event_name != 'pull_request' && startsWith(github.ref, 'refs/tags/v') }}
         uses: yokawasa/action-setup-kube-tools@v0.9.3
         with:
           setup-tools: |
@@ -98,50 +99,51 @@ jobs:
           helm: "3.13.1"
           yq: "4.35.2"
       - name: Configure Git
+        if: ${{ github.event_name != 'pull_request' && startsWith(github.ref, 'refs/tags/v') }}
         run: |
           git config user.name "Incubator"
           git config user.email "incubator@users.noreply.github.com"
       - name: Set image tag in Chart and chart version
+        if: ${{ github.event_name != 'pull_request' && startsWith(github.ref, 'refs/tags/v') }}
         run: |
           TAG=${{github.ref_name}}
           yq e -i ".app.image.tag = \"${TAG}\"" charts/gitops-nginx-demo/values.yaml
           yq e -i ".version = \"${TAG#v}\"" charts/gitops-nginx-demo/Chart.yaml
           yq e -i ".appVersion = \"${TAG#v}\"" charts/gitops-nginx-demo/Chart.yaml
       - name: Checkout forked chart-releaser
+        if: ${{ github.event_name != 'pull_request' && startsWith(github.ref, 'refs/tags/v') }}
         uses: actions/checkout@v3
         with:
           repository: edmondop/chart-releaser-action
           path: chart-releaser-action
           ref: ef58c21b3f93daff872ba384abd9cdb16e715334
       - name: Run chart-releaser
+        if: ${{ github.event_name != 'pull_request' && startsWith(github.ref, 'refs/tags/v') }}
         uses: ./chart-releaser-action
         env:
           CR_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
           CR_SKIP_EXISTING: "true"
-
-  reload-warehouse:
-    name: Refresh kargo warehouse
-    needs: helm-push
-    if: ${{ github.event_name != 'pull_request' && startsWith(github.ref, 'refs/tags/v') }}
-    runs-on: ubuntu-latest
-    permissions:
-      contents: write
-      packages: write
-      # This is used to complete the identity challenge
-      # with sigstore/fulcio when running outside of PRs.
-      id-token: write
-    steps:
+#
+#  reload-warehouse:
+#    name: Refresh kargo warehouse
+#    needs: helm-push
+#    if: ${{ github.event_name != 'pull_request' && startsWith(github.ref, 'refs/tags/v') }}
+#    runs-on: ubuntu-latest
+#    permissions:
+#      contents: write
+#      packages: write
+#      # This is used to complete the identity challenge
+#      # with sigstore/fulcio when running outside of PRs.
+#      id-token: write
+#    steps:
+      - name: Wait 1min for chart
+        if: ${{ github.event_name != 'pull_request' && startsWith(github.ref, 'refs/tags/v') }}
+        run: sleep 60
       - name: Reload warehouse
+        if: ${{ github.event_name != 'pull_request' && startsWith(github.ref, 'refs/tags/v') }}
         uses: actions-hub/kubectl@master
         env:
           KUBE_HOST: ${{ secrets.KUBE_HOST }}
           KUBE_TOKEN: ${{ secrets.KUBE_TOKEN }}
         with:
-          args: annotate warehouse kargo-demo -n kargo-demo-stages reload=${{ github.sha }} --overwrite
-      - name: Reload warehouse2
-        uses: actions-hub/kubectl@master
-        env:
-          KUBE_HOST: ${{ secrets.KUBE_HOST }}
-          KUBE_TOKEN: ${{ secrets.KUBE_TOKEN }}
-        with:
-          args: annotate warehouse kargo-joachim -n kargo-joachim-stages reload=${{ github.sha }} --overwrite
+          args: annotate warehouse kargo-example -n kargo-example-stages reload=${{ github.sha }} --overwrite
