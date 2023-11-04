@@ -85,6 +85,10 @@ jobs:
       id-token: write
 
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
       - name: Install helm & yq tools
         uses: yokawasa/action-setup-kube-tools@v0.9.3
         with:
