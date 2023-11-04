@@ -103,7 +103,7 @@ jobs:
           git config user.email "incubator@users.noreply.github.com"
       - name: Set image tag in Chart
         run: |
-          yq e ".app.image.tag = \"${{github.ref_name}}\"" charts/gitops-nginx-demo/values.yaml
+          yq e -i ".app.image.tag = \"${{github.ref_name}}\"" charts/gitops-nginx-demo/values.yaml
       - name: Create commit
         id: create-commit
         uses: stefanzweifel/git-auto-commit-action@v5
