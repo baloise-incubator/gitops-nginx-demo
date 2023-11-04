@@ -89,7 +89,6 @@ jobs:
         uses: actions/checkout@v4
         with:
           fetch-depth: 0
-          fetch-tags: true
       - name: Install helm & yq tools
         uses: yokawasa/action-setup-kube-tools@v0.9.3
         with:
@@ -105,13 +104,17 @@ jobs:
       - name: Set image tag in Chart
         run: |
           yq e ".app.image.tag = \"${{github.ref_name}}\"" charts/gitops-nginx-demo/values.yaml
+      - name: Checkout forked chart-releaser
+        uses: actions/checkout@v3
+        with:
+          repository: edmondop/chart-releaser-action
+          path: chart-releaser-action
+          ref: ef58c21b3f93daff872ba384abd9cdb16e715334
       - name: Run chart-releaser
-        uses: helm/chart-releaser-action@v1.6.0
+        uses: ./chart-releaser-action
         env:
           CR_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
           CR_SKIP_EXISTING: "true"
-        with:
-          charts_dir: charts/*
 
   reload-warehouse:
     name: Refresh kargo warehouse
