@@ -104,6 +104,27 @@ jobs:
       - name: Set image tag in Chart
         run: |
           yq e ".app.image.tag = \"${{github.ref_name}}\"" charts/gitops-nginx-demo/values.yaml
+      - name: Create commit
+        id: create-commit
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          file_pattern: charts/**
+          commit_message: "Update chart version"
+
+      - name: Save commit hash
+        id: save-commit-hash
+        run: |
+          if [ "${{ steps.create-commit.outputs.changes_detected || 'unknown' }}" == "true" ]; then
+            echo "commit_hash=${{ steps.create-commit.outputs.commit_hash }}" >> "$GITHUB_OUTPUT"
+          else
+            echo "commit_hash=${GITHUB_SHA}" >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ steps.save-commit-hash.outputs.commit_hash }}
+          fetch-depth: 0
       - name: Checkout forked chart-releaser
         uses: actions/checkout@v3
         with:
