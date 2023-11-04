@@ -1,6 +1,7 @@
 apiVersion: v2
 name: gitops-nginx-demo
-version: 1.0.1
+version: 0.1.0
+appVersion: 0.1.0
 dependencies:
   - name: generic-chart
     version: 2.3.0
