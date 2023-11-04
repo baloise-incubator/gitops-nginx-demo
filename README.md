@@ -2,7 +2,7 @@
 
 Showcase a GitOps based process with a simple static site running on nginx.
 
-Find the running app at https://demo-test.apps.baloise.dev
+Find the running app at https://demo-test.apps.baloise.dev.
 
 ## GitOps showcase
 
