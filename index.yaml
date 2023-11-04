@@ -2,18 +2,6 @@ apiVersion: v1
 entries:
   gitops-nginx-demo:
   - apiVersion: v2
-    created: "2023-11-04T15:02:28.274008193Z"
-    dependencies:
-    - alias: app
-      name: generic-chart
-      repository: https://baloise-incubator.github.io/generic-chart/
-      version: 2.3.0
-    digest: 2e58ddc8cdf502f3c033277b671a5bae90596758684fb8a42efdaf9e800bb283
-    name: gitops-nginx-demo
-    urls:
-    - https://github.com/baloise-incubator/gitops-nginx-demo/releases/download/gitops-nginx-demo-1.0.1/gitops-nginx-demo-1.0.1.tgz
-    version: 1.0.1
-  - apiVersion: v2
     created: "2023-11-04T15:26:38.763464549Z"
     dependencies:
     - alias: app
