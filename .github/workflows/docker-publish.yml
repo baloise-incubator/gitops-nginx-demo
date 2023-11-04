@@ -104,7 +104,6 @@ jobs:
       - name: Set image tag in Chart
         run: |
           yq e ".app.image.tag = \"${{github.ref_name}}\"" charts/gitops-nginx-demo/values.yaml
-          yq e ".version = \"${{github.ref_name}}\"" charts/gitops-nginx-demo/Chart.yaml
       - name: Run chart-releaser
         uses: helm/chart-releaser-action@v1.6.0
         env:
