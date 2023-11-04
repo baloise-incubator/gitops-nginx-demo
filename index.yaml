@@ -1,5 +1,18 @@
 apiVersion: v1
 entries:
+  gitops-nginx-demo:
+  - apiVersion: v2
+    created: "2023-11-04T15:02:28.274008193Z"
+    dependencies:
+    - alias: app
+      name: generic-chart
+      repository: https://baloise-incubator.github.io/generic-chart/
+      version: 2.3.0
+    digest: 2e58ddc8cdf502f3c033277b671a5bae90596758684fb8a42efdaf9e800bb283
+    name: gitops-nginx-demo
+    urls:
+    - https://github.com/baloise-incubator/gitops-nginx-demo/releases/download/gitops-nginx-demo-1.0.1/gitops-nginx-demo-1.0.1.tgz
+    version: 1.0.1
   kargo-joachim-chart:
   - apiVersion: v2
     created: "2023-11-02T21:51:48.097860772Z"
@@ -13,4 +26,4 @@ entries:
     urls:
     - https://github.com/baloise-incubator/gitops-nginx-demo/releases/download/kargo-joachim-chart-1.0.0/kargo-joachim-chart-1.0.0.tgz
     version: 1.0.0
-generated: "2023-11-02T21:51:48.097867435Z"
+generated: "2023-11-04T15:02:28.274014194Z"
