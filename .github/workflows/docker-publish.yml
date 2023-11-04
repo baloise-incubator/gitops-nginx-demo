@@ -20,7 +20,7 @@ env:
   IMAGE_NAME: ${{ vars.DOCKER_USER }}/gitops-nginx-demo
 
 jobs:
-  build-image:
+  container-build-push:
     name: Build container image and push if release
     runs-on: ubuntu-latest
     permissions:
@@ -74,6 +74,7 @@ jobs:
           cache-to: type=gha,mode=max
   helm-push:
     name: Push Helm Chart
+    needs: container-build-push
     runs-on: ubuntu-latest
     if: ${{ github.event_name != 'pull_request' && startsWith(github.ref, 'refs/tags/v') }}
     permissions:
@@ -108,6 +109,8 @@ jobs:
 
   reload-warehouse:
     name: Refresh kargo warehouse
+    needs: helm-push
+    if: ${{ github.event_name != 'pull_request' && startsWith(github.ref, 'refs/tags/v') }}
     runs-on: ubuntu-latest
     permissions:
       contents: write
