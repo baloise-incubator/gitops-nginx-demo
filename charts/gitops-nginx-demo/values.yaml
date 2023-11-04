@@ -1,13 +1,13 @@
-kargo-joachim-chart:
+app:
   replicaCount: 1
   image:
     repository: docker.io/niiku/gitops-nginx-demo
-    tag: REPLACEME_CHANGED
+    tag: TAG
   network:
     http:
       servicePort: 8080
       ingress:
-        host: REPLACEME
+        host: gitops-demo.example.org
   readinessProbe:
     httpGet:
       path: /

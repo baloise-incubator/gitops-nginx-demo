@@ -20,8 +20,8 @@ env:
   IMAGE_NAME: ${{ vars.DOCKER_USER }}/gitops-nginx-demo
 
 jobs:
-  build:
-
+  build-image:
+    name: Build container image and push if release
     runs-on: ubuntu-latest
     permissions:
       contents: write
@@ -67,32 +67,55 @@ jobs:
         uses: docker/build-push-action@0565240e2d4ab88bba5387d719585280857ece09 # v5.0.0
         with:
           context: .
-          push: ${{ github.event_name != 'pull_request' }}
+          push: ${{ github.event_name != 'pull_request' && startsWith(github.ref, 'refs/tags/v') }}
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
+  helm-push:
+    name: Push Helm Chart
+    runs-on: ubuntu-latest
+    if: ${{ github.event_name != 'pull_request' && startsWith(github.ref, 'refs/tags/v') }}
+    permissions:
+      contents: write
+      packages: write
+      # This is used to complete the identity challenge
+      # with sigstore/fulcio when running outside of PRs.
+      id-token: write
 
-      - name: Install Kubernetes tools
+    steps:
+      - name: Install helm & yq tools
         uses: yokawasa/action-setup-kube-tools@v0.9.3
         with:
           setup-tools: |
             helmv3
             yq
-          helm: "3.8.0"
-          yq: "4.16.2"
-
+          helm: "3.13.1"
+          yq: "4.35.2"
       - name: Configure Git
         run: |
           git config user.name "Incubator"
           git config user.email "incubator@users.noreply.github.com"
-
+      - name: Set image tag in Chart
+        run: |
+          yq e ".app.image.tag = \"${{github.ref_name}}\"" charts/gitops-nginx-demo/values.yaml
+          yq e ".version = \"${{github.ref_name}}\"" charts/gitops-nginx-demo/Charts.yaml
       - name: Run chart-releaser
         uses: helm/chart-releaser-action@v1.6.0
         env:
           CR_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
           CR_SKIP_EXISTING: "true"
 
+  reload-warehouse:
+    name: Refresh kargo warehouse
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      packages: write
+      # This is used to complete the identity challenge
+      # with sigstore/fulcio when running outside of PRs.
+      id-token: write
+    steps:
       - name: Reload warehouse
         uses: actions-hub/kubectl@master
         env:
@@ -100,7 +123,6 @@ jobs:
           KUBE_TOKEN: ${{ secrets.KUBE_TOKEN }}
         with:
           args: annotate warehouse kargo-demo -n kargo-demo-stages reload=${{ github.sha }} --overwrite
-
       - name: Reload warehouse2
         uses: actions-hub/kubectl@master
         env:
@@ -108,4 +130,3 @@ jobs:
           KUBE_TOKEN: ${{ secrets.KUBE_TOKEN }}
         with:
           args: annotate warehouse kargo-joachim -n kargo-joachim-stages reload=${{ github.sha }} --overwrite
-
