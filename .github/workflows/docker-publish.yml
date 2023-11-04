@@ -101,9 +101,11 @@ jobs:
         run: |
           git config user.name "Incubator"
           git config user.email "incubator@users.noreply.github.com"
-      - name: Set image tag in Chart
+      - name: Set image tag in Chart and chart version
         run: |
-          yq e -i ".app.image.tag = \"${{github.ref_name}}\"" charts/gitops-nginx-demo/values.yaml
+          TAG=${{github.ref_name}}
+          yq e -i ".app.image.tag = \"${TAG}\"" charts/gitops-nginx-demo/values.yaml
+          yq e -i ".version = \"${TAG#v}\"" charts/gitops-nginx-demo/Chart.yaml
       - name: Checkout forked chart-releaser
         uses: actions/checkout@v3
         with:
